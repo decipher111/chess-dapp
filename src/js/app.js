@@ -2,7 +2,7 @@ App = {
   web3Provider: null,
   contracts: {},
   web3js: null,
-  standardStake: 1,
+  standardStake: 100,
   adminAddress:'0x73837d7d736E9190821c85D40Df54451c40Bcb1e',
 
   init: async function() {
@@ -86,9 +86,9 @@ App = {
 
   eventListner: function(){
     $(document).on('click', '#stakeButton', function(){
-      console.log('hi')
-      window.location = "/game";
-      // App.stakeToken();
+      // console.log('hi')
+      // window.location = "/game";
+      App.stakeToken();
     });
   },
 
