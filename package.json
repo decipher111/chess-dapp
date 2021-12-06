@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.0",
+    "moralis": "0.0.147",
     "openzeppelin-solidity": "^2.5.0"
   }
 }
