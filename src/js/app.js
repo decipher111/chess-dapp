@@ -20,10 +20,10 @@ App = {
   },
 
   initContract: function() {
-    $.getJSON('TutorialToken.json', function(data) {
-      var TutorialTokenArtifact = data;
-      App.contracts.TutorialToken = TruffleContract(TutorialTokenArtifact);
-      App.contracts.TutorialToken.setProvider(App.web3Provider);
+    $.getJSON('SicilianToken.json', function(data) {
+      var SicilianTokenArtifact = data;
+      App.contracts.SicilianToken = TruffleContract(SicilianTokenArtifact);
+      App.contracts.SicilianToken.setProvider(App.web3Provider);
       return App.getBalances();
     });
 
@@ -37,12 +37,12 @@ App = {
   handleTransfer: function(event) {
     event.preventDefault();
 
-    var amount = parseInt($('#TTTransferAmount').val());
-    var toAddress = $('#TTTransferAddress').val();
+    var amount = parseInt($('#SCTTransferAmount').val());
+    var toAddress = $('#SCTTransferAddress').val();
 
-    console.log('Transfer ' + amount + ' TT to ' + toAddress);
+    console.log('Transfer ' + amount + ' SCT to ' + toAddress);
 
-    var tutorialTokenInstance;
+    var SicilianTokenInstance;
 
     App.web3js.eth.getAccounts(function(error, accounts) {
       if (error) {
@@ -51,10 +51,10 @@ App = {
 
       var account = accounts[0];
 
-      App.contracts.TutorialToken.deployed().then(function(instance) {
-        tutorialTokenInstance = instance;
+      App.contracts.SicilianToken.deployed().then(function(instance) {
+        SicilianTokenInstance = instance;
 
-        return tutorialTokenInstance.transfer(toAddress, amount, {from: account, gas: 100000});
+        return SicilianTokenInstance.transfer(toAddress, amount, {from: account, gas: 100000});
       }).then(function(result) {
         alert('Transfer Successful!');
         return App.getBalances();
@@ -66,18 +66,18 @@ App = {
 
   getBalances: function() {
     console.log('Getting balances...');
-    var tutorialTokenInstance;
+    var SicilianTokenInstance;
     App.web3js.eth.getAccounts(function(error, accounts) {
       if (error) {
         console.log(error);
       }
       var account = accounts[0];
-      App.contracts.TutorialToken.deployed().then(function(instance) {
-        tutorialTokenInstance = instance;
-        return tutorialTokenInstance.balanceOf(account);
+      App.contracts.SicilianToken.deployed().then(function(instance) {
+        SicilianTokenInstance = instance;
+        return SicilianTokenInstance.balanceOf(account);
       }).then(function(result) {
         balance = result.c[0];
-        $('#TTBalance').text(balance);
+        $('#SCTBalance').text(balance);
       }).catch(function(err) {
         console.log(err.message);
       });
@@ -86,14 +86,16 @@ App = {
 
   eventListner: function(){
     $(document).on('click', '#stakeButton', function(){
-      App.stakeToken();
+      console.log('hi')
+      window.location = "/game";
+      // App.stakeToken();
     });
   },
 
   stakeToken: function(){
     event.preventDefault();
 
-    var tutorialTokenInstance;
+    var SicilianTokenInstance;
 
     App.web3js.eth.getAccounts(function(error, accounts) {
       if (error) {
@@ -102,10 +104,10 @@ App = {
 
       var account = accounts[0];
 
-      App.contracts.TutorialToken.deployed().then(function(instance) {
-        tutorialTokenInstance = instance;
+      App.contracts.SicilianToken.deployed().then(function(instance) {
+        SicilianTokenInstance = instance;
 
-        return tutorialTokenInstance.transfer(App.adminAddress, App.standardStake, {from: account, gas: 100000});
+        return SicilianTokenInstance.transfer(App.adminAddress, App.standardStake, {from: account, gas: 100000});
       }).then(function(result) {
         alert('Transfer Successful!');
         return App.getBalances();

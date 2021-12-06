@@ -2,9 +2,9 @@ pragma solidity 0.5.16;
 
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 
-contract TutorialToken is ERC20 {
-  string public name = "TutorialToken";
-  string public symbol = "TT";
+contract SicilianToken is ERC20 {
+  string public name = "Sicilian Token";
+  string public symbol = "SCT";
   uint public INITIAL_SUPPLY = 120000;
 
   constructor() public {
