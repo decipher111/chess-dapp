@@ -10,7 +10,4 @@ contract SicilianToken is ERC20 {
   constructor() public {
     _mint(msg.sender,INITIAL_SUPPLY);
   }
-
 }
-
-

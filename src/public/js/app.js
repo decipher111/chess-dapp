@@ -1,3 +1,5 @@
+
+
 App = {
   web3Provider: null,
   contracts: {},
@@ -20,7 +22,7 @@ App = {
   },
 
   initContract: function() {
-    $.getJSON('SicilianToken.json', function(data) {
+    $.getJSON('../SicilianToken.json', function(data) {
       var SicilianTokenArtifact = data;
       App.contracts.SicilianToken = TruffleContract(SicilianTokenArtifact);
       App.contracts.SicilianToken.setProvider(App.web3Provider);
@@ -67,6 +69,7 @@ App = {
   getBalances: function() {
     console.log('Getting balances...');
     var SicilianTokenInstance;
+    console.log(App.web3js.eth.accounts[0])
     App.web3js.eth.getAccounts(function(error, accounts) {
       if (error) {
         console.log(error);
@@ -90,6 +93,13 @@ App = {
       // window.location = "/game";
       App.stakeToken();
     });
+
+    $(document).on('click', '#findGame', function(){
+      // console.log('hi')
+      window.location = "/game";
+    });
+
+
   },
 
   stakeToken: function(){
